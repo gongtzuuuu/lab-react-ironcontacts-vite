@@ -5,7 +5,7 @@ import contactData from "./contacts.json";
 function App() {
   const [contactsArray, setContactsArray] = useState(contactData.slice(0, 5));
 
-  // 2. Add random contacts
+  // Iteration 3. Add random contacts
   function getRandomContact() {
     const remainingContacts = contactData.filter((eachData) => {
       const existingContacts = contactsArray.find((existingContact) => {
@@ -20,11 +20,30 @@ function App() {
     setContactsArray((contactsArray) => [randomContact, ...contactsArray]);
   }
 
+  // Iteration 4. Sort by name and popularity
+
+  function sortByName() {
+    const sortedContacts = [...contactsArray].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+    setContactsArray(sortedContacts);
+  }
+
+  function sortByPopularity() {
+    const sortedContacts = [...contactsArray].sort(
+      (a, b) => b.popularity - a.popularity
+    );
+
+    setContactsArray(sortedContacts);
+  }
+
   return (
     <div className="Contact">
       <h1>Iron Contacts</h1>
       <button onClick={getRandomContact}>Add Random Contact</button>
-
+      <button onClick={sortByName}>Sort by name</button>
+      <button onClick={sortByPopularity}>Sort by popularity</button>
       <table>
         <thead>
           <tr>
